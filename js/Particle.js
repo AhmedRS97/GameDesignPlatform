@@ -1,4 +1,5 @@
 class Particle {
+  static score = 0;
   constructor(x, y, connections, img) {
     this.x = x || random(50, width);
     this.y = y || random(50, height);
@@ -61,16 +62,23 @@ class Particle {
     let d1 = this.distance(
       this.x,
       this.y,
-      this.connections[0].x,
-      this.connections[0].y
+      particles[this.connections[0]].x,
+      particles[this.connections[0]].y
     );
     let d2 = this.distance(
       this.x,
       this.y,
-      this.connections[1].x,
-      this.connections[1].y
+      particles[this.connections[1]].x,
+      particles[this.connections[1]].y,
     );
-    console.log(this.x);
+    if (d1 - d2 <= 20 && d1 - d2 >= -20) {
+      console.log("Close");
+      Particle.score += 1 * (deltaTime / 1000);
+    } else {
+      console.log("Not Close");
+      Particle.score -= 1 * (deltaTime / 1000);
+    }
+    console.log(Particle.score);
   }
 
   display(strokeColor) {

@@ -11,10 +11,13 @@ function preload() {
   coronaImg = loadImage("assets/coronavirus.svg");
   maskImg = loadImage("assets/mask.svg");
 }
+
 function setup() {
   createCanvas(windowWidth, windowHeight - 20);
   background(66, 170, 245);
   imageMode(CENTER);
+  textSize(32);
+
   particles = [];
   var j = 1;
   var k = 2;
@@ -58,6 +61,8 @@ function draw() {
       particles[i].display(c);
     }
   }
+  text(Particle.score, 10, 30);
+
   particles.filter((that) => {
     return that.x > 0 && that.x < width && that.y > 0 && that.y < height;
   });
